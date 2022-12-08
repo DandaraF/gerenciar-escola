@@ -1,0 +1,6 @@
+.idea/
+.chalice/deployments/
+__pycache__/
+.coverage
+.vscode/
+venv

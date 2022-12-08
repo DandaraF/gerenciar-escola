@@ -1,0 +1,73 @@
+@startuml
+class Aluno << (E,#7fff7f) >>{
+    entity_id: str
+    nome: str
+    cpf: str
+    endereco: Endereco
+    telefone: str
+    cursor_id: str
+}
+
+class Professor << (E,#7fff7f) >>{
+    entity_id: str
+    nome: str
+    cpf: str
+    endereco: Endereco
+    telefone: str
+    cursor_id: str
+    materia_id : str
+}
+
+
+class Endereco{
+    cep: str
+    logradouro: str
+    numero: str
+    complemento: str
+    bairro: str
+    cidade: str
+    estado: str
+}
+
+
+class Materia << (E,#7fff7f) >>{
+    entity_id: str
+    nome: str
+    professor_id: str
+}
+
+class Curso << (E,#7fff7f) >>{
+    entity_id: str
+    nome: str
+    materias: List[str]
+    cargo_horaria: int
+    ementa: str
+    professores: List[str]
+    periodo: Periodo
+    modalidade: Modalidade
+}
+
+enum Modalidade{
+    PRESENCIAL
+    SEMIPRESENCIAL
+    ONLINE
+}
+
+enum Periodo{
+    MATUTINO
+    DIURNO
+    NOTURNO
+}
+
+
+Aluno..> Curso
+Aluno..> Endereco
+Professor..> Endereco
+Professor..> Materia
+Curso ..> Professor
+Curso..> Periodo
+Curso ..> Modalidade
+Curso..> Materia
+
+
+@enduml

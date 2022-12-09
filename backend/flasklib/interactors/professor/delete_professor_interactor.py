@@ -5,8 +5,7 @@ from flasklib.interactors.exceptions import ProfessorNotFoundException
 
 
 class DeleteProfessorRequestModel:
-    def __init__(self,
-                 professor_id: str):
+    def __init__(self, professor_id: str):
         self.professor_id = professor_id
 
 
@@ -23,17 +22,10 @@ class DeleteProfessorInteractor:
         self.professor_adapter = professor_adapter
 
     def run(self):
-        professor_atualizado = self._deletar_professor()
-
-        return DeleteProfessorResponseModel(professor_atualizado)
-
-    def _deletar_professor(self):
         professor = self._get_professor()
-        professor.ativo = False
+        professor.soft_delete()
 
-        professor.save()
-
-        return professor
+        return DeleteProfessorResponseModel(professor)
 
     def _get_professor(self):
         professor = self.professor_adapter.get_by_id(self.request.professor_id)

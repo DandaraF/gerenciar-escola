@@ -7,4 +7,5 @@ def aluno_mock():
                  cpf="cpf",
                  endereco=endereco_mock(),
                  telefone="2312341234",
-                 curso_id="12")
+                 curso_id="12",
+                 ativo=True)

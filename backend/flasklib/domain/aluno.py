@@ -11,6 +11,7 @@ class Aluno(BasicEntity):
                  endereco: Endereco,
                  telefone: str,
                  curso_id: str,
+                 ativo: bool = True,
                  entity_id: str = None):
         super().__init__(entity_id=entity_id)
         self.nome = nome
@@ -18,6 +19,7 @@ class Aluno(BasicEntity):
         self.endereco = endereco
         self.telefone = telefone
         self.curso_id = curso_id
+        self.ativo = ativo
 
     class Schema(BasicEntity.Schema):
         nome = fields.Str(required=True)
@@ -27,6 +29,8 @@ class Aluno(BasicEntity):
                                  required=True)
         telefone = fields.Str(required=True)
         curso_id = fields.Str(required=True)
+        ativo = fields.Bool(allow_none=False,
+                            load_default=True)
 
         # noinspection PyUnusedLocal
         @post_load

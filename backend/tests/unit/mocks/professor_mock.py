@@ -8,4 +8,5 @@ def professor_mock():
                      endereco=endereco_mock(),
                      telefone="2312341234",
                      curso_id="12",
-                     materia_id="3234")
+                     materia_id="3234",
+                     ativo=True)

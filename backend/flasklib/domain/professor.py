@@ -12,6 +12,7 @@ class Professor(BasicEntity):
                  telefone: str,
                  curso_id: str,
                  materia_id: str,
+                 ativo: bool = True,
                  entity_id=None):
         super().__init__(entity_id=entity_id)
         self.nome = nome
@@ -20,6 +21,7 @@ class Professor(BasicEntity):
         self.telefone = telefone
         self.curso_id = curso_id
         self.materia_id = materia_id
+        self.ativo = ativo
 
     class Schema(BasicEntity.Schema):
         nome = fields.Str(required=True)
@@ -30,6 +32,8 @@ class Professor(BasicEntity):
         telefone = fields.Str(required=True)
         curso_id = fields.Str(required=True)
         materia_id = fields.Str(required=True)
+        ativo = fields.Bool(allow_none=False,
+                            load_default=True)
 
         # noinspection PyUnusedLocal
         @post_load

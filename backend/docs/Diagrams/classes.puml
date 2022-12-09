@@ -6,6 +6,7 @@ class Aluno << (E,#7fff7f) >>{
     endereco: Endereco
     telefone: str
     curso_id: str
+    ativo: bool
 }
 
 class Professor << (E,#7fff7f) >>{
@@ -16,6 +17,7 @@ class Professor << (E,#7fff7f) >>{
     telefone: str
     curso_id: str
     materia_id : str
+    ativo: bool
 }
 
 

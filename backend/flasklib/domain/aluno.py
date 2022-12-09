@@ -21,6 +21,10 @@ class Aluno(BasicEntity):
         self.curso_id = curso_id
         self.ativo = ativo
 
+    def soft_delete(self):
+        self.ativo = False
+        self.save()
+
     class Schema(BasicEntity.Schema):
         nome = fields.Str(required=True)
         cpf = fields.Str(required=True)

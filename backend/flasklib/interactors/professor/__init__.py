@@ -1,9 +1,9 @@
 from .delete_professor_interactor import (DeleteProfessorResponseModel,
                                           DeleteProfessorInteractor,
                                           DeleteProfessorRequestModel)
-from .get_professors_interactor import (GetProfessorsInteractor,
-                                        GetProfessorsRequestModel,
-                                        GetProfessorsResponseModel)
+from .get_professores_interactor import (GetProfessoresInteractor,
+                                         GetProfessoresRequestModel,
+                                         GetProfessoresResponseModel)
 from .post_professor_interactor import (PostProfessorRequestModel,
                                         PostProfessorInteractor,
                                         PostProfessorResponseModel)
@@ -16,9 +16,9 @@ __all__ = [
     'DeleteProfessorInteractor',
     'DeleteProfessorRequestModel',
 
-    'GetProfessorsResponseModel',
-    'GetProfessorsRequestModel',
-    'GetProfessorsInteractor',
+    'GetProfessoresResponseModel',
+    'GetProfessoresRequestModel',
+    'GetProfessoresInteractor',
 
     'PostProfessorResponseModel',
     'PostProfessorInteractor',

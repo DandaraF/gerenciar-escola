@@ -23,17 +23,10 @@ class DeleteAlunoInteractor:
         self.aluno_adapter = aluno_adapter
 
     def run(self):
-        aluno_atualizado = self._deletar_aluno()
-
-        return DeleteAlunoResponseModel(aluno_atualizado)
-
-    def _deletar_aluno(self):
         aluno = self._get_aluno()
-        aluno.ativo = False
+        aluno.soft_delete()
 
-        aluno.save()
-
-        return aluno
+        return DeleteAlunoResponseModel(aluno)
 
     def _get_aluno(self):
         aluno = self.aluno_adapter.get_by_id(self.request.aluno_id)

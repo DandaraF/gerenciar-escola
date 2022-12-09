@@ -4,19 +4,19 @@ from typing import List
 from flasklib.domain import Professor
 
 
-class GetProfessorRequestModel:
+class GetProfessoresRequestModel:
     def __init__(self, ativo: bool):
         self.ativo = ativo
 
 
 @dataclass
-class GetProfessorResponseModel:
+class GetProfessoresResponseModel:
     professores: List[Professor]
 
 
-class GetProfessorInteractor:
+class GetProfessoresInteractor:
     def __init__(self,
-                 request: GetProfessorRequestModel,
+                 request: GetProfessoresRequestModel,
                  professor_adapter):
         self.request = request
         self.professor_adapter = professor_adapter
@@ -24,7 +24,7 @@ class GetProfessorInteractor:
     def run(self):
         professores = self._get_professores_filtrados()
 
-        return GetProfessorResponseModel(professores)
+        return GetProfessoresResponseModel(professores)
 
     def _get_professores(self):
         return self.professor_adapter.list_all()

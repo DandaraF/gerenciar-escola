@@ -1,9 +1,10 @@
-from typing import List
 from enum import Enum
-from marshmallow import fields, Schema, post_load
+from typing import List
+
+from marshmallow import fields, post_load
 from marshmallow_enum import EnumField
 
-from flasklib.domain import BasicEntity
+from basic import BasicEntity
 
 
 class Periodo(Enum):
@@ -29,7 +30,7 @@ class Curso(BasicEntity):
         self.professores_ids = professores_ids
         self.periodo = periodo
 
-    class Schema(Schema):
+    class Schema(BasicEntity.Schema):
         nome = fields.Str(required=True)
         materias_id = fields.List(fields.Str,
                                   load_default=[],
@@ -43,6 +44,7 @@ class Curso(BasicEntity):
                             required=True,
                             by_value=True)
 
+        # noinspection PyUnusedLocal
         @post_load
         def post_load(self, data, **kwargs):
             return Curso(**data)

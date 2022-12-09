@@ -1,6 +1,6 @@
-from marshmallow import fields, Schema, post_load
+from marshmallow import fields, post_load
 
-from flasklib.domain import BasicEntity
+from basic import BasicEntity
 
 
 class Materia(BasicEntity):
@@ -10,10 +10,10 @@ class Materia(BasicEntity):
         super().__init__(entity_id=entity_id)
         self.nome = nome
 
-    class Schema(Schema):
+    class Schema(BasicEntity.Schema):
         nome = fields.Str(required=True)
 
+        # noinspection PyUnusedLocal
         @post_load
         def post_load(self, data, **kwargs):
             return Materia(**data)
-

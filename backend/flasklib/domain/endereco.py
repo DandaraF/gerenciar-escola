@@ -1,9 +1,11 @@
 from typing import Optional
 
-from marshmallow import post_load, Schema
+from marshmallow import post_load, fields
+
+from basic import BasicValue
 
 
-class Endereco:
+class Endereco(BasicValue):
     def __init__(self,
                  cep: str,
                  logradouro: str,
@@ -20,8 +22,15 @@ class Endereco:
         self.cidade = cidade
         self.estado = estado
 
-    class Schema(Schema):
-        ...
+    class Schema(BasicValue.Schema):
+        cep = fields.Str(required=True)
+        logradouro = fields.Str(required=True)
+        numero = fields.Str(required=True)
+        complemento = fields.Str(required=False,
+                                 allow_none=True)
+        bairro = fields.Str(required=True)
+        cidade = fields.Str(required=True)
+        estado = fields.Str(required=True)
 
         # noinspection PyUnusedLocal
         @post_load

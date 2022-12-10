@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 
-from flasklib.domain import Aluno
+from flasklib.domain import Aluno, Endereco, Curso
 
 
 class GetAlunosRequestModel:
@@ -10,16 +10,29 @@ class GetAlunosRequestModel:
 
 
 @dataclass
+class ResponseAluno:
+    entity_id: str
+    nome: str
+    cpf: str
+    endereco: Endereco
+    telefone: str
+    curso: Curso
+    ativo: bool
+
+
+@dataclass
 class GetAlunosResponseModel:
-    alunos: List[Aluno]
+    alunos: List[ResponseAluno]
 
 
 class GetAlunosInteractor:
     def __init__(self,
                  request: GetAlunosRequestModel,
-                 aluno_adapter):
+                 aluno_adapter,
+                 curso_adapter):
         self.request = request
         self.aluno_adapter = aluno_adapter
+        self.curso_adapter = curso_adapter
 
     def run(self):
         alunos = self._get_alunos_filtrados()
@@ -27,7 +40,16 @@ class GetAlunosInteractor:
         return GetAlunosResponseModel(alunos)
 
     def _get_alunos(self):
-        return self.aluno_adapter.list_all()
+        alunos: List[Aluno] = self.aluno_adapter.list_all()
+
+        return [ResponseAluno(entity_id=a.entity_id,
+                              nome=a.nome,
+                              cpf=a.cpf,
+                              endereco=a.endereco,
+                              telefone=a.telefone,
+                              curso=self._get_curso_by_id(a.curso_id),
+                              ativo=a.ativo)
+                for a in alunos]
 
     def _get_alunos_filtrados(self):
         alunos = self._get_alunos()
@@ -42,3 +64,5 @@ class GetAlunosInteractor:
 
         return alunos
 
+    def _get_curso_by_id(self, curso_id: str):
+        return self.curso_adapter.get_by_id(curso_id)

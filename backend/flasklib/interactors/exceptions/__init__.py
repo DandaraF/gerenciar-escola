@@ -1,9 +1,13 @@
-from .aluno_exceptions import AlunoNotFoundException
-from .professor_exceptions import ProfessorNotFoundException
-from .materia_exceptions import MateriaNotFoundException
+from .aluno_exception import AlunoNotFoundException
+from .professor_exception import ProfessorNotFoundException
+from .materia_exception import MateriaNotFoundException
+from .periodo_exception import PeriodoInvalidException
+from .curso_exception import CursoNotFoundException
 
 __all__ = [
     'AlunoNotFoundException',
     'ProfessorNotFoundException',
-    'MateriaNotFoundException'
+    'MateriaNotFoundException',
+    'PeriodoInvalidException',
+    'CursoNotFoundException'
 ]
